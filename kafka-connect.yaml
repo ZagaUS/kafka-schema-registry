@@ -1,0 +1,18 @@
+kind: KafkaConnect
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  name: dev-connect-cluster
+  namespace: kafka-workspace
+spec:
+  version: 3.4.0
+  replicas: 1
+  bootstrapServers: 'dev-persistent-cluster-kafka-bootstrap.kafka-workspace.svc.cluster.local:9092'
+  image: docker.io/sharon0706/mongo-plugin:v1
+  config:
+    group.id: connect-cluster-dev
+    offset.storage.topic: connect-cluster-dev-offsets
+    config.storage.topic: connect-cluster-dev-configs
+    status.storage.topic: connect-cluster-dev-status
+    config.storage.replication.factor: -1
+    offset.storage.replication.factor: -1
+    status.storage.replication.factor: -1
